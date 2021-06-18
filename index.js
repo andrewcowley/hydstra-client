@@ -5,8 +5,15 @@ class HydstraClient {
     this.baseURL = options.baseURL;
   }
 
+    async getSiteList (queryParams) {
+      const requestURL = this.buildURL(queryParams);
+      const response = await this.makeRequest(requestURL);
+      return response;
+  }
+
   buildURL(queryParams) {
-    return `${this.baseURL}${queryParams}`;
+    const requestURL =  `${this.baseURL}${JSON.stringify(queryParams)}&ver=2`;
+    return requestURL;
   }
 
   async makeRequest(url) {
@@ -15,3 +22,4 @@ class HydstraClient {
     return data;
   }
 }
+
