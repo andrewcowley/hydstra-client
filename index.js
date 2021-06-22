@@ -5,6 +5,18 @@ class HydstraClient {
     this.baseURL = options.baseURL;
   }
 
+  async getLatestTSValues (queryParams) {
+    const requestURL = this.buildURL(queryParams);
+    const response = await this.makeRequest(requestURL);
+    return response;
+  }
+
+  async getSitesByDataSource (queryParams) {
+    const requestURL = this.buildURL(queryParams);
+    const response = await this.makeRequest(requestURL);
+    return response;
+  }
+
   async getSiteList(queryParams) {
     const requestURL = this.buildURL(queryParams);
     const response = await this.makeRequest(requestURL);
