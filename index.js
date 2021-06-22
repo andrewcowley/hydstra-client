@@ -1,44 +1,68 @@
 const fetch = require("node-fetch");
 
 const methodNames = {
+  getDatasourcesBySite: {
+    function: "get_datasources_by_site",
+    version: 1,
+  },
+  getLatestTSValues: {
+    function: "get_latest_ts_values",
+    version: 2,
+  },
+  getSitesByDataSource: {
+    function: "get_sites_by_datasource",
+    version: 1,
+  },
+  getSiteGeojson: {
+    function: "get_site_geojson",
+    version: 2,
+  },
   getSiteList: {
     function: "get_site_list",
     version: 1,
-  }
-}
+  },
+  getVariableList: {
+    function: "get_variable_list",
+    version: 1,
+  },
+};
 
 class HydstraClient {
   constructor(options) {
     this.baseURL = options.baseURL;
   }
 
-  async getDatasourcesBySite (queryParams) {
-    return await this.callMethod(queryParams)
+  async getDatasourcesBySite(queryParams) {
+    const params = { params: queryParams, ...methodNames.getDatasourcesBySite };
+    return await this.callMethod(params);
   }
 
-  async getLatestTSValues (queryParams) {
-    return await this.callMethod(queryParams)
+  async getLatestTSValues(queryParams) {
+    const params = { params: queryParams, ...methodNames.getLatestTSValues };
+    return await this.callMethod(params);
   }
 
-  async getSitesByDataSource (queryParams) {
-    return await this.callMethod(queryParams)
+  async getSitesByDataSource(queryParams) {
+    const params = { params: queryParams, ...methodNames.getSitesByDataSource };
+    return await this.callMethod(params);
   }
 
-  async getSiteGeojson (queryParams) {
-    return await this.callMethod(queryParams)
+  async getSiteGeojson(queryParams) {
+    const params = { params: queryParams, ...methodNames.getSiteGeojson };
+    return await this.callMethod(params);
   }
 
   async getSiteList(queryParams) {
-    const params = {params: queryParams, ...methodNames.getSiteList}
-    console.log(params)
-    return await this.callMethod(params)
+    const params = { params: queryParams, ...methodNames.getSiteList };
+    return await this.callMethod(params);
   }
 
-  async getVariableList (queryParams) {
-    return await this.callMethod(queryParams)
+  async getVariableList(queryParams) {
+    const params = { params: queryParams, ...methodNames.getVariableList };
+    return await this.callMethod(params);
   }
 
-  async callMethod (queryParams) {
+  async callMethod(queryParams) {
     const requestURL = this.buildURL(queryParams);
     const response = await this.makeRequest(requestURL);
     return response;
@@ -59,11 +83,3 @@ class HydstraClient {
     }
   }
 }
-
-const a = new HydstraClient({baseURL: 'https://realtimedata.waternsw.com.au/cgi/webservice.pl?'})
-const b = async () => {
-  const data = await a.getSiteList({site_list: "MATCH(20100*)"});
-  console.log(data);
-};
-
-b();
