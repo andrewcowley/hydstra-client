@@ -6,18 +6,18 @@ class HydstraClient {
   }
 
   async getLatestTSValues (queryParams) {
-    const requestURL = this.buildURL(queryParams);
-    const response = await this.makeRequest(requestURL);
-    return response;
+    return await this.callMethod(queryParams)
   }
 
   async getSitesByDataSource (queryParams) {
-    const requestURL = this.buildURL(queryParams);
-    const response = await this.makeRequest(requestURL);
-    return response;
+    return await this.callMethod(queryParams)
   }
 
   async getSiteList(queryParams) {
+    return await this.callMethod(queryParams)
+  }
+
+  async callMethod (queryParams) {
     const requestURL = this.buildURL(queryParams);
     const response = await this.makeRequest(requestURL);
     return response;
@@ -38,3 +38,17 @@ class HydstraClient {
     }
   }
 }
+
+const a = new HydstraClient({baseURL: 'https://realtimedata.waternsw.com.au/cgi/webservice.pl?'})
+const b = async () => {
+  const data = await a.getSiteList({
+    function: "get_site_list",
+    version: 1,
+    params: {
+      site_list: "MATCH(20100*)"
+    }
+  });
+  console.log(data);
+};
+
+b();
