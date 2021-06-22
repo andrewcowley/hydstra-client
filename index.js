@@ -5,6 +5,10 @@ class HydstraClient {
     this.baseURL = options.baseURL;
   }
 
+  async getDatasourcesBySite (queryParams) {
+    return await this.callMethod(queryParams)
+  }
+
   async getLatestTSValues (queryParams) {
     return await this.callMethod(queryParams)
   }
