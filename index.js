@@ -1,5 +1,12 @@
 const fetch = require("node-fetch");
 
+const methodNames = {
+  getSiteList: {
+    function: "get_site_list",
+    version: 1,
+  }
+}
+
 class HydstraClient {
   constructor(options) {
     this.baseURL = options.baseURL;
@@ -22,7 +29,9 @@ class HydstraClient {
   }
 
   async getSiteList(queryParams) {
-    return await this.callMethod(queryParams)
+    const params = {params: queryParams, ...methodNames.getSiteList}
+    console.log(params)
+    return await this.callMethod(params)
   }
 
   async getVariableList (queryParams) {
@@ -50,3 +59,11 @@ class HydstraClient {
     }
   }
 }
+
+const a = new HydstraClient({baseURL: 'https://realtimedata.waternsw.com.au/cgi/webservice.pl?'})
+const b = async () => {
+  const data = await a.getSiteList({site_list: "MATCH(20100*)"});
+  console.log(data);
+};
+
+b();
