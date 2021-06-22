@@ -13,6 +13,10 @@ class HydstraClient {
     return await this.callMethod(queryParams)
   }
 
+  async getSiteGeojson (queryParams) {
+    return await this.callMethod(queryParams)
+  }
+
   async getSiteList(queryParams) {
     return await this.callMethod(queryParams)
   }
@@ -38,17 +42,3 @@ class HydstraClient {
     }
   }
 }
-
-const a = new HydstraClient({baseURL: 'https://realtimedata.waternsw.com.au/cgi/webservice.pl?'})
-const b = async () => {
-  const data = await a.getSiteList({
-    function: "get_site_list",
-    version: 1,
-    params: {
-      site_list: "MATCH(20100*)"
-    }
-  });
-  console.log(data);
-};
-
-b();
