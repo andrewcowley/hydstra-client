@@ -25,6 +25,10 @@ class HydstraClient {
     return await this.callMethod(queryParams)
   }
 
+  async getVariableList (queryParams) {
+    return await this.callMethod(queryParams)
+  }
+
   async callMethod (queryParams) {
     const requestURL = this.buildURL(queryParams);
     const response = await this.makeRequest(requestURL);
