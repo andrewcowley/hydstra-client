@@ -12,6 +12,7 @@ A thin promise based wrapper around the hydstra http service created by Kisters 
 
 ```
 const HydstraClient = require('hydstra-client);
+
 const data = new HydstraClient({
     baseURL: 'https://realtimedata.waternsw.com.au/cgi/webservice.pl?'
 });
@@ -19,7 +20,7 @@ const data = new HydstraClient({
 
 ## API
 
-**Please note that this package does not have a stable API yet!**
+**Please note that this project does not have a stable API yet!**
 
 - `getDatasourcesBySite`
 - `getLatestTSValues`
