@@ -42,6 +42,25 @@ type getLatestTSValuesOptions = {
   tracelist: Tracelist
 }
 
+type getSitesByDataSourceOptions = {
+  datasources: string[]
+}
+
+type getSiteGeojsonOptions = {
+  site_list: string | string[]
+  fields: string[]
+  get_elev?: boolean
+}
+
+type getSiteListOptions = {
+  site_list: string | string[]
+}
+
+type getVariableListOptions = {
+  site_list: string | string[]
+  datasource: string
+}
+
 type Tracelist = {
   varfrom: number
   varto: number
@@ -70,22 +89,22 @@ class HydstraClient {
     return await this.callMethod(params);
   }
 
-  async getSitesByDataSource(queryParams) {
+  async getSitesByDataSource(queryParams: getSitesByDataSourceOptions) {
     const params = { params: queryParams, ...methodNames.getSitesByDataSource };
     return await this.callMethod(params);
   }
 
-  async getSiteGeojson(queryParams) {
+  async getSiteGeojson(queryParams: getSiteGeojsonOptions) {
     const params = { params: queryParams, ...methodNames.getSiteGeojson };
     return await this.callMethod(params);
   }
 
-  async getSiteList(queryParams) {
+  async getSiteList(queryParams: getSiteListOptions) {
     const params = { params: queryParams, ...methodNames.getSiteList };
     return await this.callMethod(params);
   }
 
-  async getVariableList(queryParams) {
+  async getVariableList(queryParams: getVariableListOptions) {
     const params = { params: queryParams, ...methodNames.getVariableList };
     return await this.callMethod(params);
   }
@@ -101,7 +120,7 @@ class HydstraClient {
     return requestURL;
   }
 
-  async makeRequest(url) {
+  async makeRequest(url: string) {
     try {
       const response = await fetch(url);
       const data = await response.json();
