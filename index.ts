@@ -72,6 +72,12 @@ type Tracelist = {
   now?: boolean
 }
 
+type RequestObj = {
+  function: string
+  version: number
+  params: any
+}
+
 class HydstraClient {
   baseURL: string;
 
@@ -81,48 +87,43 @@ class HydstraClient {
 
   async getDatasourcesBySite(queryParams: getDatasourcesBySiteOptions) {
     const params = { params: queryParams, ...methodNames.getDatasourcesBySite };
-    return await this.callMethod(params);
+    return await this.makeRequest(params);
   }
 
   async getLatestTSValues(queryParams: getLatestTSValuesOptions) {
     const params = { params: queryParams, ...methodNames.getLatestTSValues };
-    return await this.callMethod(params);
+    return await this.makeRequest(params);
   }
 
   async getSitesByDataSource(queryParams: getSitesByDataSourceOptions) {
     const params = { params: queryParams, ...methodNames.getSitesByDataSource };
-    return await this.callMethod(params);
+    return await this.makeRequest(params);
   }
 
   async getSiteGeojson(queryParams: getSiteGeojsonOptions) {
     const params = { params: queryParams, ...methodNames.getSiteGeojson };
-    return await this.callMethod(params);
+    return await this.makeRequest(params);
   }
 
   async getSiteList(queryParams: getSiteListOptions) {
     const params = { params: queryParams, ...methodNames.getSiteList };
-    return await this.callMethod(params);
+    return await this.makeRequest(params);
   }
 
   async getVariableList(queryParams: getVariableListOptions) {
     const params = { params: queryParams, ...methodNames.getVariableList };
-    return await this.callMethod(params);
+    return await this.makeRequest(params);
   }
 
-  async callMethod(queryParams) {
-    const requestURL = this.buildURL(queryParams);
-    const response = await this.makeRequest(requestURL);
-    return response;
-  }
-
-  buildURL(queryParams) {
-    const requestURL = `${this.baseURL}${JSON.stringify(queryParams)}&ver=2`;
+  buildURL(requestObject: RequestObj) {
+    const requestURL = `${this.baseURL}${JSON.stringify(requestObject)}&ver=2`;
     return requestURL;
   }
 
-  async makeRequest(url: string) {
+  async makeRequest(requestObject: RequestObj) {
+    const requestURL = this.buildURL(requestObject);
     try {
-      const response = await fetch(url);
+      const response = await fetch(requestURL);
       const data = await response.json();
       return data;
     } catch (error) {
