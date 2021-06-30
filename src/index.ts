@@ -1,31 +1,5 @@
 import fetch from "node-fetch";
-
-const methodNames = {
-  getDatasourcesBySite: {
-    function: "get_datasources_by_site",
-    version: 1,
-  },
-  getLatestTSValues: {
-    function: "get_latest_ts_values",
-    version: 2,
-  },
-  getSitesByDataSource: {
-    function: "get_sites_by_datasource",
-    version: 1,
-  },
-  getSiteGeojson: {
-    function: "get_site_geojson",
-    version: 2,
-  },
-  getSiteList: {
-    function: "get_site_list",
-    version: 1,
-  },
-  getVariableList: {
-    function: "get_variable_list",
-    version: 1,
-  },
-};
+import availableMethods from "./lib/availableMethods.js"
 
 type HydstraClientOptions = {
   baseURL: string
@@ -86,32 +60,32 @@ class HydstraClient {
   }
 
   async getDatasourcesBySite(queryParams: getDatasourcesBySiteOptions) {
-    const params = { params: queryParams, ...methodNames.getDatasourcesBySite };
+    const params = { params: queryParams, ...availableMethods.getDatasourcesBySite };
     return await this.makeRequest(params);
   }
 
   async getLatestTSValues(queryParams: getLatestTSValuesOptions) {
-    const params = { params: queryParams, ...methodNames.getLatestTSValues };
+    const params = { params: queryParams, ...availableMethods.getLatestTSValues };
     return await this.makeRequest(params);
   }
 
   async getSitesByDataSource(queryParams: getSitesByDataSourceOptions) {
-    const params = { params: queryParams, ...methodNames.getSitesByDataSource };
+    const params = { params: queryParams, ...availableMethods.getSitesByDataSource };
     return await this.makeRequest(params);
   }
 
   async getSiteGeojson(queryParams: getSiteGeojsonOptions) {
-    const params = { params: queryParams, ...methodNames.getSiteGeojson };
+    const params = { params: queryParams, ...availableMethods.getSiteGeojson };
     return await this.makeRequest(params);
   }
 
   async getSiteList(queryParams: getSiteListOptions) {
-    const params = { params: queryParams, ...methodNames.getSiteList };
+    const params = { params: queryParams, ...availableMethods.getSiteList };
     return await this.makeRequest(params);
   }
 
   async getVariableList(queryParams: getVariableListOptions) {
-    const params = { params: queryParams, ...methodNames.getVariableList };
+    const params = { params: queryParams, ...availableMethods.getVariableList };
     return await this.makeRequest(params);
   }
 
