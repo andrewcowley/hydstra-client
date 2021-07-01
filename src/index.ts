@@ -13,7 +13,7 @@ type getDatasourcesBySiteOptions = {
 type getLatestTSValuesOptions = {
   site_list: string
   datasource: string | string[]
-  tracelist: Tracelist
+  trace_list: Tracelist
 }
 
 type getSitesByDataSourceOptions = {
@@ -36,15 +36,15 @@ type getVariableListOptions = {
 }
 
 type Tracelist = {
-  varfrom: number
-  varto: number
+  varfrom: string
+  varto: string
   accum_period?: number
   accum_partial?: number
   daystart?: number
   lookback?: number
   anyqual?: number
   now?: boolean
-}
+}[]
 
 type RequestObj = {
   function: string
