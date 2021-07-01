@@ -52,7 +52,7 @@ type RequestObj = {
   params: any
 }
 
-class HydstraClient {
+export class HydstraClient {
   baseURL: string;
 
   constructor(options: HydstraClientOptions) {
