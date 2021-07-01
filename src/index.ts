@@ -90,7 +90,7 @@ export class HydstraClient {
   }
 
   buildURL(requestObject: RequestObj) {
-    const requestURL = `${this.baseURL}${JSON.stringify(requestObject)}&ver=2`;
+    const requestURL = `${this.baseURL}?${JSON.stringify(requestObject)}&ver=2`;
     return requestURL;
   }
 
