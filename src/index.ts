@@ -3,6 +3,7 @@ import availableMethods from "./lib/availableMethods.js";
 
 type HydstraClientOptions = {
   baseURL: string;
+  apiVersion: number;
 };
 
 type getDatasourcesBySiteOptions = {
@@ -54,9 +55,11 @@ type RequestObj = {
 
 export class HydstraClient {
   baseURL: string;
+  apiVersion: number;
 
   constructor(options: HydstraClientOptions) {
     this.baseURL = options.baseURL;
+    this.apiVersion = options.apiVersion;
   }
 
   async getDatasourcesBySite(queryParams: getDatasourcesBySiteOptions) {
@@ -99,7 +102,7 @@ export class HydstraClient {
   }
 
   buildURL(requestObject: RequestObj) {
-    const requestURL = `${this.baseURL}?${JSON.stringify(requestObject)}&ver=2`;
+    const requestURL = `${this.baseURL}?${JSON.stringify(requestObject)}&ver=${this.apiVersion}`;
     return requestURL;
   }
 
