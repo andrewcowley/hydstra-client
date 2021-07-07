@@ -1,4 +1,4 @@
-import { HydstraClient } from "../src";
+const { HydstraClient } = require('../src/index.js')
 
 const hc = new HydstraClient({
   baseURL: "https://realtimedata.waternsw.com.au/cgi/webservice.exe",

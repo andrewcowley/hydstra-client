@@ -1,11 +1,9 @@
-import { HydstraClient } from "../src";
+const { HydstraClient } = require('../src/index.js')
 
 const hc = new HydstraClient({
   baseURL: "https://realtimedata.waternsw.com.au/cgi/webservice.exe",
 });
 
-hc.getDatasourcesBySite({
-  site_list: "MATCH(203010)",
-}).then((response) => {
+hc.getSitesByDataSource({ datasources: ["CP"] }).then((response) => {
   console.log(response);
 });
