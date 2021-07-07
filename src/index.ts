@@ -108,9 +108,13 @@ export class HydstraClient {
     try {
       const response = await fetch(requestURL);
       const data = await response.json();
-      return data;
+      if(data.error_num > 0) {
+        return Promise.reject(`API Error: ${data.error_num}: ${data.error_msg}`)
+      } else {
+        return data;
+      }
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   }
 }
