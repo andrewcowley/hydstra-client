@@ -1,42 +1,42 @@
 import fetch from "node-fetch";
 import availableMethods from "./lib/availableMethods.js";
 
-type HydstraClientOptions = {
+interface HydstraClientOptions {
   baseURL: string;
   apiVersion: number;
 };
 
-type getDatasourcesBySiteOptions = {
+interface getDatasourcesBySiteOptions {
   site_list: string;
   ts_classes?: string[];
 };
 
-type getLatestTSValuesOptions = {
+interface getLatestTSValuesOptions {
   site_list: string;
   datasource: string | string[];
   trace_list: Tracelist;
 };
 
-type getSitesByDataSourceOptions = {
+interface getSitesByDataSourceOptions {
   datasources: string[];
 };
 
-type getSiteGeojsonOptions = {
+interface getSiteGeojsonOptions {
   site_list: string | string[];
   fields: string[];
   get_elev?: boolean;
 };
 
-type getSiteListOptions = {
+interface getSiteListOptions {
   site_list: string | string[];
 };
 
-type getVariableListOptions = {
+interface getVariableListOptions {
   site_list: string | string[];
   datasource: string;
 };
 
-type Tracelist = {
+interface Tracelist {
   varfrom: string;
   varto: string;
   accum_period?: number;
@@ -47,7 +47,7 @@ type Tracelist = {
   now?: boolean;
 }[];
 
-type RequestObj = {
+interface RequestObj {
   function: string;
   version: number;
   params: any;
@@ -103,6 +103,7 @@ export class HydstraClient {
 
   buildURL(requestObject: RequestObj) {
     const requestURL = `${this.baseURL}?${JSON.stringify(requestObject)}&ver=${this.apiVersion}`;
+    console.log(requestURL)
     return requestURL;
   }
 
